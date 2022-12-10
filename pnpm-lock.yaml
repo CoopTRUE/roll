@@ -13,6 +13,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
   ethers: ^5.7.2
+  lightweight-charts: ^3.8.0
   normalize.css: ^8.0.1
   postcss: ^8.4.19
   postcss-load-config: ^4.0.1
@@ -22,6 +23,7 @@ specifiers:
   sass: ^1.56.2
   svelte: ^3.54.0
   svelte-check: ^2.10.2
+  svelte-lightweight-charts: ^1.6.3
   tslib: ^2.4.1
   typescript: ^4.9.4
   vite: ^4.0.0
@@ -41,6 +43,7 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.29.0
   eslint-plugin-svelte3: 4.0.0_2aagxyyd66x6iymg5nfckajqjq
   ethers: 5.7.2
+  lightweight-charts: 3.8.0
   normalize.css: 8.0.1
   postcss: 8.4.19
   postcss-load-config: 4.0.1_postcss@8.4.19
@@ -50,6 +53,7 @@ devDependencies:
   sass: 1.56.2
   svelte: 3.54.0
   svelte-check: 2.10.2_mdnlwrukihkccok7f7fvelfrze
+  svelte-lightweight-charts: 1.6.3_jyunx5o5fjxelmozrzaurr2qei
   tslib: 2.4.1
   typescript: 4.9.4
   vite: 4.0.0_sass@1.56.2
@@ -1734,6 +1738,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /fancy-canvas/0.2.2:
+    resolution: {integrity: sha512-50qi8xA0QkHbjmb8h7XQ6k2fvD7y/yMfiUw9YTarJ7rWrq6o5/3CCXPouYk+XSLASvvxtjyiQLRBFt3qkE3oyA==}
+    dev: true
+
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
@@ -2045,6 +2053,12 @@ packages:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
+    dev: true
+
+  /lightweight-charts/3.8.0:
+    resolution: {integrity: sha512-7yFGnYuE1RjRJG9RwUTBz5wvF1QtjBOSW4FFlikr8Dh+/TDNt4ci+HsWSYmStgQUpawpvkCJ3j5/W25GppGj9Q==}
+    dependencies:
+      fancy-canvas: 0.2.2
     dev: true
 
   /lilconfig/2.0.6:
@@ -2693,6 +2707,16 @@ packages:
     peerDependencies:
       svelte: '>=3.19.0'
     dependencies:
+      svelte: 3.54.0
+    dev: true
+
+  /svelte-lightweight-charts/1.6.3_jyunx5o5fjxelmozrzaurr2qei:
+    resolution: {integrity: sha512-vzOduKp1ZkkQzRMQbFn1FYHDg90zQEshOuDESGT3KZhTIErxPDeWSrc84v/oosxaNLYUO69p/7KvFO7Ixc2yiA==}
+    peerDependencies:
+      lightweight-charts: '>=3.3.0'
+      svelte: '>=3.44.0'
+    dependencies:
+      lightweight-charts: 3.8.0
       svelte: 3.54.0
     dev: true
 
