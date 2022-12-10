@@ -12,7 +12,7 @@ model User {
   id        String @id @default(cuid())
   address   String @unique
   signature String @unique
-  usd       Float  @default(0)
+  balance   Float  @default(0)
 
   logins              Login[]
   plays               Play[]

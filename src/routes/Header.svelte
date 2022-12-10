@@ -1,1 +1,5 @@
-<header>I am a header</header>
+<script>
+  import Balance from './Balance.svelte'
+</script>
+
+<header />
