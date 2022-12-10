@@ -14,7 +14,9 @@
     "format": "prettier --plugin-search-dir . --write ."
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@playwright/test": "^1.28.1",
+    "@prisma/client": "^4.7.1",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
@@ -29,6 +31,7 @@
     "postcss-load-config": "^4.0.1",
     "prettier": "^2.8.1",
     "prettier-plugin-svelte": "^2.9.0",
+    "prisma": "^4.7.1",
     "sass": "^1.56.2",
     "svelte": "^3.54.0",
     "svelte-check": "^2.10.2",
