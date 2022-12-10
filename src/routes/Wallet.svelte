@@ -1,13 +1,26 @@
-<script lang="ts">
-  import 'normalize.css'
-  import '../global.scss'
-  import Header from './Header.svelte'
-  import Footer from './Footer.svelte'
+<script>
+  import { address } from '$lib/stores'
+  let hover = false
+
+  $: shortAddr = $address ? $address.slice(0, 5) + '...' + $address.slice(-3) : ''
 </script>
 
-<style lang="scss">
-  .container {
-    display: grid;
-    place-items: center;
+<button on:mouseenter={() => (hover = true)} on:mouseleave={() => (hover = false)}>
+  {#if !$address}
+    <span>Connect Wallet</span>
+  {:else if hover}
+    <span>{shortAddr}</span>
+  {:else}
+    <span>Logout?</span>
+  {/if}
+</button>
+
+<style>
+  button {
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    cursor: pointer;
   }
 </style>
