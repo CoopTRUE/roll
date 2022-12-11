@@ -3,6 +3,11 @@
   import { Chart, LineSeries } from 'svelte-lightweight-charts'
   import { onMount } from 'svelte'
 
+  let windowWidth: number
+  let windowHeight: number
+  $: gameWidth = windowWidth - 350
+  $: gameHeight = windowHeight - 400
+
   let data: { time: string; value: number }[] = [{ time: '2000-1-1', value: 0 }]
   function simulateData() {
     for (let i = 0; i < 100; i++) {
@@ -21,16 +26,20 @@
   }
 </script>
 
+<svelte:window bind:innerWidth={windowWidth} bind:innerHeight={windowHeight} />
 <main>
   <Side />
-  <Chart
-    width={600}
-    height={300}
-    timeScale={{ tickMarkFormatter: tickMarkFormatter }}
-    localization={{ priceFormatter }}
-  >
-    <LineSeries {data} color="#61DD4C" reactive={true} />
-  </Chart>
+  <div class="chart-wrapper">
+    <h2></h2>
+    <Chart
+      width={gameWidth}
+      height={gameHeight}
+      timeScale={{ tickMarkFormatter: tickMarkFormatter }}
+      localization={{ priceFormatter }}
+    >
+      <LineSeries {data} color="#61DD4C" reactive={true} />
+    </Chart>
+  </div>
 </main>
 
 <style>
@@ -39,7 +48,6 @@
     height: 100vh;
   }
   .container {
-    flex: 1;
     background: red;
   }
 </style>

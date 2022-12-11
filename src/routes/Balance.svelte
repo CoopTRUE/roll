@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cuid, balance } from '$lib/stores'
+  import { cuid, roundedBalance } from '$lib/stores'
   import { fade, fly } from 'svelte/transition'
   import { quadOut } from 'svelte/easing'
   import BalanceModal from './BalanceModal.svelte'
@@ -13,7 +13,7 @@
     in:fly={{ x: 0, y: -100, duration: 600, easing: quadOut }}
     out:fade={{ duration: 600, easing: quadOut }}
   >
-    <p class="balance">${$balance}</p>
+    <p class="balance">${$roundedBalance}</p>
     <button class="manage" on:click={() => (modalOpen = true)}>Manage</button>
   </div>
 {/if}
