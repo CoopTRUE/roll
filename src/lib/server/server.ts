@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { CRASH_SPEED } from '$lib/constants'
 import { ABLY_API_KEY, REAL_GAME } from '$env/static/private'
-import * as Ably from 'ably'
+import Ably from 'ably'
 
 type GameStatus = 'playing' | 'waiting' | 'crashed'
 
@@ -16,7 +16,7 @@ let gameStatus: GameStatus = 'waiting'
 let multiplier = 0
 let stopped = false
 setTimeout(() => (stopped = true), 100000)
-if (+env.REAL_GAME) startGame()
+if (+REAL_GAME) startGame()
 
 export async function startGame() {
   console.log('Starting game')
