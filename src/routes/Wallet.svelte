@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { TransitionConfig } from 'svelte/transition'
-  import { address, provider, cuid } from '$lib/stores'
+  import { address, provider, cuid, balance } from '$lib/stores'
   import { SIG_MESSAGE } from '$lib/constants'
   import { ethers } from 'ethers'
   import axios from 'axios'
@@ -23,6 +23,8 @@
     if (hover) {
       $address = null
       $provider = null
+      $cuid = null
+      $balance = null
     }
   }
   async function signMessage(provider: ethers.providers.Web3Provider, address: string) {
@@ -32,7 +34,7 @@
     try {
       const _provider = new ethers.providers.Web3Provider(window.ethereum, 'any')
       const _address = await _provider.getSigner().getAddress()
-      const _signature = await signMessage(_provider, _address)
+      // const _signature = await signMessage(_provider, _address)
       console.log(_address)
       const post = await axios.post('/api/login', {
         address: _address,
@@ -41,7 +43,8 @@
       })
       $provider = _provider
       $address = _address
-      $cuid = post.data
+      $cuid = post.data.id
+      $balance = post.data.balance
     } catch (e) {
       console.log(e)
     } finally {
@@ -95,7 +98,7 @@
     display: grid;
     place-items: center;
     border-radius: 8px;
-    background-color: var(--color-primary);
+    background-color: var(--color-background);
     font-weight: 600;
     position: relative;
   }
@@ -117,7 +120,7 @@
     align-items: center;
     height: 10em;
     gap: 1em;
-    background-color: var(--color-primary);
+    background-color: var(--color-background);
     width: 100%;
     border-radius: 8px;
     overflow: hidden;

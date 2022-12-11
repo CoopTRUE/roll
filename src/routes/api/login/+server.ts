@@ -12,5 +12,6 @@ const schema = z.object({
 export const POST = (async ({ request, getClientAddress }) => {
   const { address, signature } = schema.parse(await request.json())
   const user = await login(address, signature, getClientAddress())
-  return json(user.id)
+  const { id, balance } = user
+  return json({ id, balance })
 }) satisfies RequestHandler

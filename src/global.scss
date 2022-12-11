@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 :root {
   font-family: Inter, sans-serif;
-  --color-primary: #807ED1;
+  --color-primary: #344054;
+  --color-secondary: #667085;
+  --color-background: #807ED1;
+  color: var(--color-primary);
 }
 
 *, *::before, *::after {
