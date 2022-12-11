@@ -1,15 +1,14 @@
 <script lang="ts">
   import 'normalize.css'
   import '../global.scss'
-  import { PUBLIC_ABLY_KEY } from '$env/static/public'
-  import Ably from 'ably'
   import { browser } from '$app/environment'
+  import { socket } from '$lib/stores'
   if (browser) {
-    const ably = new Ably.Realtime(PUBLIC_ABLY_KEY)
-    const channel = ably.channels.get('gameStatus')
-    channel.subscribe('update', (message) => {
-      console.log(message)
-    })
+    // wait 10 seconds for the socket to connect
+    if ($socket.connected) console.log('CONNECTED TO REALTIME')
+    else $socket.on('connect', () => console.log('CONNECTED TO REALTIME'))
+    $socket.on('message', console.log)
+    // console log any messages from the server
   }
 </script>
 

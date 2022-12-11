@@ -1,10 +1,9 @@
 <script lang="ts">
   import type { TransitionConfig } from 'svelte/transition'
-  import { address, provider, cuid, balance } from '$lib/stores'
-  import { SIG_MESSAGE } from '$lib/constants'
+  import { API, address, provider, cuid, balance } from '$lib/stores'
+  import { SIG_MESSAGE } from '../constants'
   import { cubicOut } from 'svelte/easing'
   import { ethers } from 'ethers'
-  import axios from 'axios'
 
   function slideOut(node: HTMLElement): TransitionConfig {
     return {
@@ -38,7 +37,7 @@
       const _address = await _provider.getSigner().getAddress()
       // const _signature = await signMessage(_provider, _address)
       console.log(_address)
-      const post = await axios.post('/api/login', {
+      const post = await $API('login', {
         address: _address,
         signature:
           '0x5d8ce286dbba22a57d413dc3ef4b61dbdb612a8849744082b13a864a4d515ec93190adeff2e96b4e8f6e69c660afdc585bb8255f3e7c50fa37e156abe7801f1f1c'
