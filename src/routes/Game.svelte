@@ -8,22 +8,25 @@
   $: gameWidth = windowWidth - 350
   $: gameHeight = windowHeight - 400
 
-  let data: { time: string; value: number }[] = [{ time: '2000-1-1', value: 0 }]
+  const updateRate = 20
+
+  let data: { time: number; value: number }[] = []
   let rate = 1.5
+  let multiplier = 0
   function simulateData() {
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 1000; i++) {
       setTimeout(() => {
-        data = [...data, { time: 2000 + i + '-1-1', value: (i / 500) * rate }]
-        rate += 0.005
-      }, i * 20)
+        multiplier = (i / 500) * rate
+        data = [...data, { time: i, value: multiplier }]
+        rate += 0.009
+      }, i * updateRate)
     }
   }
 
   onMount(simulateData)
-  function tickMarkFormatter({ year }: { year: number }) {
-    year -= 2000
-    const r = year % 5 ? '' : year - 39 + 's'
-    return r
+  function timeFormatter(t: number) {
+    t /= 1000 / updateRate
+    return Math.floor(t) + 's'
   }
   function priceFormatter(price: number) {
     return price.toFixed(2) + 'x'
@@ -34,12 +37,12 @@
 <main>
   <Side />
   <div class="chart-wrapper">
-    <h2 />
+    <h2>{multiplier.toFixed(2)}x</h2>
     <Chart
       width={gameWidth}
       height={gameHeight}
-      timeScale={{ tickMarkFormatter }}
-      localization={{ priceFormatter, timeFormatter: () => '' }}
+      timeScale={{ tickMarkFormatter: timeFormatter }}
+      localization={{ priceFormatter, timeFormatter }}
     >
       <LineSeries {data} color="#61DD4C" reactive={true} />
     </Chart>
@@ -51,7 +54,16 @@
     display: flex;
     height: 100vh;
   }
-  .container {
-    background: red;
+  .chart-wrapper {
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+  h2 {
+    position: absolute;
+    z-index: 5;
+    font-weight: 700;
+    font-size: 200px;
+    color: #b1b1b1;
   }
 </style>
