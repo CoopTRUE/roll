@@ -2,12 +2,14 @@
   import type { TransitionConfig } from 'svelte/transition'
   import { address, provider, cuid, balance } from '$lib/stores'
   import { SIG_MESSAGE } from '$lib/constants'
+  import { cubicOut } from 'svelte/easing'
   import { ethers } from 'ethers'
   import axios from 'axios'
 
   function slideOut(node: HTMLElement): TransitionConfig {
     return {
-      duration: 500,
+      duration: 700,
+      easing: cubicOut,
       css: (t) => `
         height: ${t * 10}em;
       `
