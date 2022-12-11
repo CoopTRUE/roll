@@ -11,3 +11,7 @@ declare namespace App {
 declare module '*&webp' {
   export default string
 }
+
+interface Window {
+  ethereum: any
+}

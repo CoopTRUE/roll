@@ -6,7 +6,7 @@ prisma.$connect().then(() => {
   console.log('Database connected!')
 })
 
-async function login(address: string, signature: string, ip: string) {
+export async function login(address: string, signature: string, ip: string) {
   return await prisma.user.upsert({
     where: { signature },
     update: {
