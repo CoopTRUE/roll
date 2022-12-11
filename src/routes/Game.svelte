@@ -9,17 +9,21 @@
   $: gameHeight = windowHeight - 400
 
   let data: { time: string; value: number }[] = [{ time: '2000-1-1', value: 0 }]
+  let rate = 1.5
   function simulateData() {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 10000; i++) {
       setTimeout(() => {
-        data = [...data, { time: 2000 + i + '-1-1', value: i + Math.random() }]
-      }, 1000 * i)
+        data = [...data, { time: 2000 + i + '-1-1', value: (i / 500) * rate }]
+        rate += 0.005
+      }, i * 20)
     }
   }
 
   onMount(simulateData)
   function tickMarkFormatter({ year }: { year: number }) {
-    return year - 2000 + 's'
+    year -= 2000
+    const r = year % 5 ? '' : year - 39 + 's'
+    return r
   }
   function priceFormatter(price: number) {
     return price.toFixed(2) + 'x'
@@ -30,12 +34,12 @@
 <main>
   <Side />
   <div class="chart-wrapper">
-    <h2></h2>
+    <h2 />
     <Chart
       width={gameWidth}
       height={gameHeight}
-      timeScale={{ tickMarkFormatter: tickMarkFormatter }}
-      localization={{ priceFormatter }}
+      timeScale={{ tickMarkFormatter }}
+      localization={{ priceFormatter, timeFormatter: () => '' }}
     >
       <LineSeries {data} color="#61DD4C" reactive={true} />
     </Chart>
