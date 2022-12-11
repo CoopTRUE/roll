@@ -37,7 +37,7 @@ console.log('DATABASE CONNECTED AND LOADED!')
 // @ts-expect-error (ts-node doesn't like .ts)
 import { Game } from './game.ts'
 const game = new Game(0.1, io)
-game.startGame()
+// game.startGame()
 
 import { z } from 'zod'
 app.post('/api/login', async (req, res) => {
