@@ -26,7 +26,7 @@
   .container {
     display: flex;
     place-items: center;
-    border: 2px solid #d0d5dd;
+    border: 2px solid var(--color-border-primary);
     border-radius: 8px;
     font-weight: 600;
     overflow: hidden;

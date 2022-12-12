@@ -2,6 +2,7 @@
   import Side from './Side.svelte'
   import { Chart, LineSeries } from 'svelte-lightweight-charts'
   import { onMount } from 'svelte'
+  import { browser } from '$app/environment'
 
   let windowWidth: number
   let windowHeight: number
@@ -31,6 +32,13 @@
   function priceFormatter(price: number) {
     return price.toFixed(2) + 'x'
   }
+
+  let borderColor: string
+  if (browser) {
+    borderColor = getComputedStyle(document.documentElement).getPropertyValue(
+      '--color-border-secondary'
+    )
+  }
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} bind:innerHeight={windowHeight} />
@@ -41,11 +49,27 @@
     <Chart
       width={gameWidth}
       height={gameHeight}
-      timeScale={{ tickMarkFormatter: timeFormatter }}
-      localization={{ priceFormatter, timeFormatter }}
+      timeScale={{ tickMarkFormatter: timeFormatter, rightOffset: 10 }}
+      localization={{ priceFormatter, timeFormatter: () => '' }}
+      layout={{ textColor: '#98A2B3' }}
+      grid={{ horzLines: { color: borderColor }, vertLines: { color: borderColor } }}
+      handleScroll={false}
+      handleScale={false}
+      crosshair={{
+        vertLine: { visible: false, labelVisible: false },
+        horzLine: { visible: false, labelVisible: false }
+      }}
     >
-      <LineSeries {data} color="#61DD4C" reactive={true} />
+      <LineSeries
+        {data}
+        color="#61DD4C"
+        reactive={true}
+        lastValueVisible={false}
+        priceLineVisible={false}
+        crosshairMarkerVisible={false}
+      />
     </Chart>
+    <img src="/images/logo.svg" alt="" />
   </div>
 </main>
 
@@ -64,6 +88,14 @@
     z-index: 5;
     font-weight: 700;
     font-size: 200px;
-    color: #b1b1b1;
+    color: #eeeeee;
+    user-select: none;
+  }
+  img {
+    position: absolute;
+    z-index: 5;
+    width: 50px;
+    right: 70px;
+    top: 225px;
   }
 </style>

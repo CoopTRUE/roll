@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     padding: 1em;
-    background: #eee;
     justify-content: space-between;
+    border-bottom: 2px solid var(--color-border-secondary);
   }
 </style>
